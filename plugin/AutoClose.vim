@@ -372,7 +372,7 @@ function! s:DefineVariables()
                 \ 'AutoCloseSelectionWrapPrefix': '<LEADER>a',
                 \ 'AutoClosePumvisible': {"ENTER": "\<C-Y>", "ESC": "\<C-E>"},
                 \ 'AutoCloseExpandEnterOn': "{[(",
-                \ 'AutoCloseExpandSpace': 1,
+                \ 'AutoCloseExpandSpace': 0,
                 \ }
 
     " Let the user define if he/she wants the plugin to do special actions when the
