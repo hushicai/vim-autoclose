@@ -545,9 +545,9 @@ command! AutoCloseToggle :call s:ToggleAutoClose()
 "     'This is a [cursor] test'
 "
 " This function is to solve the problem shown before
-" you can use <tab> to close a opener manully;
-" you can also use <tab> to jump over a closer.
-function! s:TabFunc()
+" you can use <c-l> to close a opener manully;
+" you can also use <c-l> to jump over a closer.
+function! s:CloseOrJumpPair()
     let l:line = getline('.')
     let l:prevChar = l:line[col('.')-2]
     let l:nextChar = l:line[col('.')-1]
@@ -561,11 +561,11 @@ function! s:TabFunc()
         return "\<right>"
     else
     " otherwise
-        return "\<tab>"
+        return "\<c-l>"
     endif
 endfunction
 
 " tab close
-inoremap <buffer> <silent> <tab> <C-R>=<SID>TabFunc()<CR>
+inoremap <buffer> <silent> <c-l> <C-R>=<SID>CloseOrJumpPair()<CR>
 
 " vim:sw=4:sts=4:
