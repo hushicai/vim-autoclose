@@ -539,4 +539,33 @@ augroup END
 command! AutoCloseOn :let b:AutoCloseOn = 1
 command! AutoCloseOff :let b:AutoCloseOn = 0
 command! AutoCloseToggle :call s:ToggleAutoClose()
+
+
+" if you enter a single quote char `'` in the [cursor] below, it will cause something ugly
+"     'This is a [cursor] test'
+"
+" This function is to solve the problem shown before
+" you can use <tab> to close a opener manully;
+" you can also use <tab> to jump over a closer.
+function! s:TabFunc()
+    let l:line = getline('.')
+    let l:prevChar = l:line[col('.')-2]
+    let l:nextChar = l:line[col('.')-1]
+
+    " if begin with a opener, close it manully
+    if has_key(b:AutoClosePairs, l:prevChar) && l:nextChar != b:AutoClosePairs[l:prevChar]
+        call s:InsertStringAtCursor(b:AutoClosePairs[l:prevChar])
+        return ""
+    " if follow with a closer, jump out it
+    elseif index(values(b:AutoClosePairs), l:nextChar) >= 0
+        return "\<right>"
+    else
+    " otherwise
+        return "\<tab>"
+    endif
+endfunction
+
+" tab close
+inoremap <buffer> <silent> <tab> <C-R>=<SID>TabFunc()<CR>
+
 " vim:sw=4:sts=4:
