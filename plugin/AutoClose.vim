@@ -565,7 +565,4 @@ function! s:CloseOrJumpPair()
     endif
 endfunction
 
-" tab close
-inoremap <buffer> <silent> <c-l> <C-R>=<SID>CloseOrJumpPair()<CR>
-
 " vim:sw=4:sts=4:
